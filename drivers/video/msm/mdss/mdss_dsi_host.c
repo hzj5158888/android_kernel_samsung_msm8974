@@ -1421,6 +1421,7 @@ static int mdss_dsi_cmd_dma_tx(struct mdss_dsi_ctrl_pdata *ctrl,
 	}
 
 	ctrl->mdss_util->iommu_unlock();
+
 	ctrl->dma_addr = 0;
 	ctrl->dma_size = 0;
 
