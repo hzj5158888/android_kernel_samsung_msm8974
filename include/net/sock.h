@@ -799,7 +799,11 @@ void sk_stream_wait_close(struct sock *sk, long timeo_p);
 int sk_stream_error(struct sock *sk, int flags, int err);
 void sk_stream_kill_queues(struct sock *sk);
 
+<<<<<<< HEAD
 int sk_wait_data(struct sock *sk, long *timeo, const struct sk_buff *skb);
+=======
+int sk_wait_data(struct sock *sk, long *timeo);
+>>>>>>> df470a56... BACKPORT: sock.h: Remove extern from function prototypes
 
 struct request_sock_ops;
 struct timewait_sock_ops;
