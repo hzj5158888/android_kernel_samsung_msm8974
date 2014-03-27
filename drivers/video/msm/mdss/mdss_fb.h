@@ -264,6 +264,7 @@ struct msm_fb_data_type {
 	struct ion_handle *fb_ion_handle;
 
 	int blank_mode;
+	struct dma_buf *fbmem_buf;
 };
 
 static inline void mdss_fb_update_notify_update(struct msm_fb_data_type *mfd)
