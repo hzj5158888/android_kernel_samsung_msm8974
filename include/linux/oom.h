@@ -75,6 +75,9 @@ extern void dump_tasks(const struct mem_cgroup *memcg,
 		const nodemask_t *nodemask);
 
 /* sysctls */
+extern void dump_tasks(const struct mem_cgroup *memcg,
+		const nodemask_t *nodemask);
+
 extern int sysctl_oom_dump_tasks;
 extern int sysctl_oom_kill_allocating_task;
 extern int sysctl_panic_on_oom;
