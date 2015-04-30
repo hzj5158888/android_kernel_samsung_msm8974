@@ -78,7 +78,6 @@ enum color_fmts {
 	 */
 	COLOR_FMT_NV21,
 };
-
 static inline unsigned int VENUS_EXTRADATA_SIZE(int width, int height)
 {
 	(void)height;
