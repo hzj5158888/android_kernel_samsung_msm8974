@@ -408,6 +408,9 @@ struct mdss_dsi_ctrl_pdata {
 #if defined(CONFIG_FB_MSM_MDSS_TC_DSI2LVDS_WXGA_PANEL)
 	struct regulator *iovdd_vreg;
 #endif
+
+	unsigned long dma_size;
+	dma_addr_t dma_addr;
 };
 
 struct dsi_status_data {
