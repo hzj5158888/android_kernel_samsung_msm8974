@@ -1541,7 +1541,11 @@ static int unix_attach_fds(struct scm_cookie *scm, struct sk_buff *skb)
 		return -ENOMEM;
 
 	for (i = scm->fp->count - 1; i >= 0; i--)
+<<<<<<< HEAD
 		unix_inflight(scm->fp->user, scm->fp->fp[i]);
+=======
+		unix_inflight(scm->fp->fp[i]);
+>>>>>>> e12e2bd... unix: properly account for FDs passed over unix sockets
 	return max_level;
 }
 
