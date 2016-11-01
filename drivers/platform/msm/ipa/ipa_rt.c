@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2016, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -193,6 +193,7 @@ int ipa_generate_rt_hw_tbl(enum ipa_ip_type ip, struct ipa_mem_buffer *mem)
 	int max_rt_idx;
 	int i;
 	int res;
+<<<<<<< HEAD
 
 	res = ipa_get_rt_hw_tbl_size(ip, &hdr_sz, &max_rt_idx);
 	if (res < 0) {
@@ -200,6 +201,15 @@ int ipa_generate_rt_hw_tbl(enum ipa_ip_type ip, struct ipa_mem_buffer *mem)
 		goto error;
 	}
 
+=======
+
+	res = ipa_get_rt_hw_tbl_size(ip, &hdr_sz, &max_rt_idx);
+	if (res < 0) {
+		IPAERR("ipa_get_rt_hw_tbl_size failed %d\n", res);
+		goto error;
+	}
+
+>>>>>>> 1b3faa4... msm: ipa: fix ioctl input param validation
 	mem->size = res;
 	mem->size = (mem->size + IPA_RT_TABLE_MEMORY_ALLIGNMENT) &
 				~IPA_RT_TABLE_MEMORY_ALLIGNMENT;
