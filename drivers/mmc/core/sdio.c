@@ -1330,7 +1330,13 @@ err:
 	mmc_release_host(host);
 	return err;
 #else
-	return mmc_power_restore_host(card->host);
+	int err;
+
+	mmc_claim_host(card->host);
+	err = mmc_power_restore_host(card->host);
+	mmc_release_host(card->host);
+
+	return err;
 #endif /* CONFIG_BCM4339 || CONFIG_BCM4335  || CONFIG_BCM4354 */
 }
 EXPORT_SYMBOL(sdio_reset_comm);
