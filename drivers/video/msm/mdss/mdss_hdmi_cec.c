@@ -24,6 +24,7 @@
 #define RETRANSMIT_MAX_NUM	5
 
 #define MAX_OPERAND_SIZE	14
+
 /* total size:  HEADER block (1) + opcode block (1) + operands (14) */
 #define MAX_CEC_FRAME_SIZE      (MAX_OPERAND_SIZE + 2)
 
@@ -420,8 +421,7 @@ static void hdmi_cec_msg_recv(struct work_struct *work)
 		msg_node->msg.sender_id, msg_node->msg.recvr_id,
 		msg_node->msg.frame_size);
 
-	if (msg_node->msg.frame_size < 1
-	    || msg_node->msg.frame_size > MAX_CEC_FRAME_SIZE) {
+	if (msg_node->msg.frame_size < 1 || msg_node->msg.frame_size > MAX_CEC_FRAME_SIZE) {
 		DEV_ERR("%s: invalid message (frame length = %d)",
 			__func__, msg_node->msg.frame_size);
 		kfree(msg_node);
