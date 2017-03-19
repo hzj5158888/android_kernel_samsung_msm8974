@@ -713,3 +713,12 @@ static int __init msm_cpufreq_register(void)
 }
 
 device_initcall(msm_cpufreq_register);
+<<<<<<< HEAD
+=======
+
+static int __init msm_cpufreq_early_register(void)
+{
+	return register_hotcpu_notifier(&msm_cpufreq_cpu_notifier);
+}
+core_initcall(msm_cpufreq_early_register);
+>>>>>>> 61842e9... Revert "clock-a7/krait: Change initcall level for early probe"
