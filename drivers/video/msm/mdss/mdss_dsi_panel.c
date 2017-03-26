@@ -21,6 +21,7 @@
 #include <linux/leds.h>
 #include <linux/qpnp/pwm.h>
 #include <linux/err.h>
+#include <linux/display_state.h>
 
 #if defined(CONFIG_FB_MSM_MDSS_MDP3)
 #include <linux/mutex.h>
@@ -50,6 +51,13 @@ static struct mdss_dsi_driver_data msd;
 DEFINE_LED_TRIGGER(bl_led_trigger);
 
 /*static struct mdss_dsi_phy_ctrl phy_params;*/
+
+bool display_on = true;
+
+bool is_display_on()
+{
+	return display_on;
+}
 
 void mdss_dsi_panel_pwm_cfg(struct mdss_dsi_ctrl_pdata *ctrl)
 {
@@ -519,6 +527,8 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 		return -EINVAL;
 	}
 
+	display_on = true;
+
 	ctrl = container_of(pdata, struct mdss_dsi_ctrl_pdata,
 				panel_data);
 	mipi  = &pdata->panel_info.mipi;
@@ -540,6 +550,7 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 #endif
 
 	pr_debug("%s:-\n", __func__);
+
 	return 0;
 }
 
@@ -575,6 +586,9 @@ static int mdss_dsi_panel_off(struct mdss_panel_data *pdata)
 #endif
 
 	pr_debug("%s:-\n", __func__);
+
+	display_on = false;
+
 	return 0;
 }
 
