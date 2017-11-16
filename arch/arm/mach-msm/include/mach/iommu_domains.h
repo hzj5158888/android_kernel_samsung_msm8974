@@ -113,7 +113,7 @@ extern int msm_iommu_map_contig_buffer(phys_addr_t phys,
 				unsigned long size,
 				unsigned long align,
 				unsigned long cached,
-				dma_addr_t *iova_val);
+				unsigned long *iova_val);
 
 
 extern void msm_iommu_unmap_contig_buffer(unsigned long iova,
