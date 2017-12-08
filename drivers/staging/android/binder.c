@@ -926,7 +926,6 @@ static void binder_delete_free_buffer(struct binder_proc *proc,
 	}
 
 	if (!list_is_last(&buffer->entry, &proc->buffers)) {
-<<<<<<< HEAD
 		next = list_entry(buffer->entry.next,
 				  struct binder_buffer, entry);
 		if (buffer_start_page(next) == buffer_end_page(buffer)) {
@@ -934,11 +933,6 @@ static void binder_delete_free_buffer(struct binder_proc *proc,
 			if (buffer_start_page(next) ==
 			    buffer_start_page(buffer))
 				free_page_start = 0;
-=======
-		next = binder_buffer_next(buffer);
-		if (buffer_start_page(next) == buffer_start_page(buffer)) {
-			to_free = false;
->>>>>>> e7ea791... UPSTREAM: include/linux/mm.h: add PAGE_ALIGNED() helper
 			binder_debug(BINDER_DEBUG_BUFFER_ALLOC,
 				     "%d: merge free, buffer %pK share page with %pK\n",
 				      proc->pid, buffer, prev);
@@ -3739,18 +3733,6 @@ static void binder_deferred_release(struct binder_proc *proc)
 
 	binder_stats_deleted(BINDER_STAT_PROC);
 
-<<<<<<< HEAD
-=======
-	while (!list_empty(&proc->buffers)) {
-		buffer = list_first_entry(&proc->buffers,
-		WARN_ON(!buffer->free);
-
-		list_del(&buffer->entry);
-		WARN_ON_ONCE(!list_empty(&proc->buffers));
-		kfree(buffer);
-	}
-
->>>>>>> e7ea791... UPSTREAM: include/linux/mm.h: add PAGE_ALIGNED() helper
 	page_count = 0;
 	if (proc->pages) {
 		int i;
