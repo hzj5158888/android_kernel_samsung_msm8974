@@ -936,7 +936,6 @@ static void binder_delete_free_buffer(struct binder_proc *proc,
 
 	if (!list_is_last(&buffer->entry, &proc->buffers)) {
 		next = binder_buffer_next(buffer);
-				  struct binder_buffer, entry);
 		if (buffer_start_page(next) == buffer_end_page(buffer)) {
 			free_page_end = 0;
 			if (buffer_start_page(next) ==
