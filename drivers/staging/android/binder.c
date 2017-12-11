@@ -2154,7 +2154,6 @@ static void binder_transaction(struct binder_proc *proc,
 	if (!IS_ALIGNED(tr->offsets_size, sizeof(binder_size_t))) {
 		binder_user_error("%d:%d got transaction with invalid offsets size, %lld\n",
 				proc->pid, thread->pid, (u64)tr->offsets_size);
-<<<<<<< HEAD
 		return_error = BR_FAILED_REPLY;
 		goto err_bad_offset;
 	}
@@ -2165,18 +2164,6 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error = BR_FAILED_REPLY;
 		goto err_bad_offset;
 	}
-=======
-		return_error = BR_FAILED_REPLY;
-		goto err_bad_offset;
-	}
-	if (!IS_ALIGNED(extra_buffers_size, sizeof(u64))) {
-		binder_user_error("%d:%d got transaction with unaligned buffers size, %lld\n",
-				  proc->pid, thread->pid,
-				  (u64)extra_buffers_size);
-		return_error = BR_FAILED_REPLY;
-		goto err_bad_offset;
-	}
->>>>>>> samsung/lineage-15.0
 	off_end = (void *)off_start + tr->offsets_size;
 	sg_bufp = (u8 *)(PTR_ALIGN(off_end, sizeof(void *)));
 	sg_buf_end = sg_bufp + extra_buffers_size;
@@ -2707,10 +2694,7 @@ static int binder_thread_write(struct binder_proc *proc,
 			struct binder_work *w;
 			binder_uintptr_t cookie;
 			struct binder_ref_death *death = NULL;
-<<<<<<< HEAD
 
-=======
->>>>>>> samsung/lineage-15.0
 			if (get_user(cookie, (binder_uintptr_t __user *)ptr))
 				return -EFAULT;
 
