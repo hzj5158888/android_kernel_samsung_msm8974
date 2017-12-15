@@ -575,7 +575,6 @@ static int msm_bus_dbg_fill_fab_buffer(const char *fabname,
 			found = 1;
 			break;
 		}
-<<<<<<< HEAD
 	}
 
 	if (!found) {
@@ -584,16 +583,6 @@ static int msm_bus_dbg_fill_fab_buffer(const char *fabname,
 		return -EINVAL;
 	}
 
-=======
-	}
-
-	if (!found) {
-		MSM_BUS_DBG("Fabric dbg entry %s does not exist\n", fabname);
-		mutex_unlock(&msm_bus_dbg_fablist_lock);
-		return -EINVAL;
-	}
-
->>>>>>> ab18d05... IKHSS7-18791 msm:fix the list usage in msm_bus_dbg
 	if (fablist->file == NULL) {
 		MSM_BUS_DBG("Fabric dbg entry does not exist\n");
 		mutex_unlock(&msm_bus_dbg_fablist_lock);
