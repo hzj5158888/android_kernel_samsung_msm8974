@@ -1112,12 +1112,6 @@ rndis_qc_bind_config_vendor(struct usb_configuration *c, u8 ethaddr[ETH_ALEN],
 	status = usb_add_function(c, &rndis->port.func);
 	if (status) {
 		goto fail;
-		kfree(rndis);
-		_rndis_qc = NULL;
-fail:
-		rndis_exit();
-	} else {
-		_rndis_qc = rndis;
 	}
 
 	_rndis_qc = rndis;
@@ -1262,8 +1256,6 @@ static int rndis_qc_init(void)
 {
 	int ret;
 
-	spin_lock_init(&rndis_lock);
-
 	pr_info("initialize rndis QC instance\n");
 
 	spin_lock_init(&rndis_lock);
@@ -1280,6 +1272,7 @@ static void rndis_qc_cleanup(void)
 	pr_info("rndis QC cleanup");
 
 	misc_deregister(&rndis_qc_device);
+	_rndis_qc = NULL;
 }
 
 
