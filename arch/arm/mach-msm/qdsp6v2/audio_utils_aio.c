@@ -112,11 +112,7 @@ static int audio_aio_ion_lookup_vaddr(struct q6audio_aio *audio, void *addr,
 		if (addr >= region_elt->vaddr &&
 			addr < region_elt->vaddr + region_elt->len &&
 			addr + len <= region_elt->vaddr + region_elt->len &&
-<<<<<<< HEAD
 			addr + len > addr) {
-=======
-			addr+len > addr) {
->>>>>>> 14a1497... ASoC: msm: qdsp6v2: extend validation of virtual address
 			/* to avoid integer addition overflow */
 
 			/* offset since we could pass vaddr inside a registerd
