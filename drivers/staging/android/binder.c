@@ -306,12 +306,8 @@ struct binder_buffer {
 	struct binder_node *target_node;
 	size_t data_size;
 	size_t offsets_size;
-<<<<<<< HEAD
 	size_t extra_buffers_size;
-	uint8_t data[0];
-=======
 	void *data;
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
 };
 
 enum binder_deferred_state {
@@ -655,12 +651,7 @@ static struct binder_buffer *binder_buffer_lookup(struct binder_proc *proc,
 	struct binder_buffer *buffer;
 	void *kern_ptr;
 
-<<<<<<< HEAD
-	kern_ptr = (struct binder_buffer *)(user_ptr - proc->user_buffer_offset
-		- offsetof(struct binder_buffer, data));
-=======
 	kern_ptr = (void *)(user_ptr - proc->user_buffer_offset);
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
 
 	while (n) {
 		buffer = rb_entry(n, struct binder_buffer, rb_node);
@@ -946,14 +937,8 @@ static void binder_delete_free_buffer(struct binder_proc *proc,
 	if (prev_buffer_end_page(prev) == buffer_start_page(buffer)) {
 		to_free = false;
 		binder_debug(BINDER_DEBUG_BUFFER_ALLOC,
-<<<<<<< HEAD
 			     "%d: merge free, buffer %pK share page with %pK\n",
-			      proc->pid, buffer, prev);
-=======
-			     "binder: %d: merge free, buffer %pK "
-			     "share page with %pK\n",
-			     proc->pid, buffer->data, prev->data);
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
+			      proc->pid, buffer->data, prev->data);
 	}
 
 	if (!list_is_last(&buffer->entry, &proc->buffers)) {
@@ -961,16 +946,8 @@ static void binder_delete_free_buffer(struct binder_proc *proc,
 		if (buffer_start_page(next) == buffer_start_page(buffer)) {
 			to_free = false;
 			binder_debug(BINDER_DEBUG_BUFFER_ALLOC,
-<<<<<<< HEAD
 				     "%d: merge free, buffer %pK share page with %pK\n",
-				      proc->pid, buffer, prev);
-=======
-				     "binder: %d: merge free, buffer"
-				     " %pK share page with %pK\n",
-				     proc->pid,
-				     buffer->data,
-				     prev->data);
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
+				      proc->pid, buffer->data, prev->data);
 		}
 	}
 	if (PAGE_ALIGNED(buffer->data)) {
@@ -982,22 +959,12 @@ static void binder_delete_free_buffer(struct binder_proc *proc,
 
 	if (to_free) {
 		binder_debug(BINDER_DEBUG_BUFFER_ALLOC,
-<<<<<<< HEAD
-			     "%d: merge free, buffer %pK do not share page%s%s with %pK or %pK\n",
-			     proc->pid, buffer, free_page_start ? "" : " end",
-			     free_page_end ? "" : " start", prev, next);
-		binder_update_page_range(proc, 0, free_page_start ?
-			buffer_start_page(buffer) : buffer_end_page(buffer),
-			(free_page_end ? buffer_end_page(buffer) :
-			buffer_start_page(buffer)) + PAGE_SIZE, NULL);
-=======
 			     "%d: merge free, buffer %pK do not share page with %pK or %pK\n",
 			     proc->pid, buffer->data,
 			     prev->data, next->data);
 		binder_update_page_range(proc, 0, buffer_start_page(buffer),
 					 buffer_start_page(buffer) + PAGE_SIZE,
 					 NULL);
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
 	}
 	list_del(&buffer->entry);
 	kfree(buffer);
@@ -3618,13 +3585,10 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	INIT_LIST_HEAD(&proc->todo);
 	init_waitqueue_head(&proc->wait);
 	proc->default_priority = task_nice(current);
-<<<<<<< HEAD
+	INIT_LIST_HEAD(&proc->buffers);
 	binder_dev = container_of(filp->private_data, struct binder_device,
 				  miscdev);
 	proc->context = &binder_dev->context;
-=======
-	INIT_LIST_HEAD(&proc->buffers);
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
 
 	binder_lock(__func__);
 
@@ -3702,13 +3666,9 @@ static void binder_deferred_release(struct binder_proc *proc)
 	struct binder_transaction *t;
 	struct binder_context *context = proc->context;
 	struct rb_node *n;
-<<<<<<< HEAD
+	struct binder_buffer *buffer;
 	int threads, nodes, incoming_refs, outgoing_refs, buffers,
 		active_transactions, page_count;
-=======
-	struct binder_buffer *buffer;
-	int threads, nodes, incoming_refs, outgoing_refs, buffers, active_transactions, page_count;
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
 
 	BUG_ON(proc->vma);
 	BUG_ON(proc->files);
@@ -3787,11 +3747,6 @@ static void binder_deferred_release(struct binder_proc *proc)
 
 	buffers = 0;
 	while ((n = rb_first(&proc->allocated_buffers))) {
-<<<<<<< HEAD
-		struct binder_buffer *buffer;
-
-=======
->>>>>>> 9b9f599... android: binder: Move buffer out of area shared with user space
 		buffer = rb_entry(n, struct binder_buffer, rb_node);
 
 		t = buffer->transaction;
@@ -4458,3 +4413,4 @@ device_initcall(binder_init);
 #include "binder_trace.h"
 
 MODULE_LICENSE("GPL v2");
+
