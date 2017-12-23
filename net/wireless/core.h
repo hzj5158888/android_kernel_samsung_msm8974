@@ -444,10 +444,6 @@ int cfg80211_set_freq(struct cfg80211_registered_device *rdev,
 		      struct wireless_dev *wdev, int freq,
 		      enum nl80211_channel_type channel_type);
 
-<<<<<<< HEAD
-=======
-u32 cfg80211_calculate_bitrate(struct rate_info *rate);
->>>>>>> e903280... BACKPORT: {nl,cfg}80211: support high bitrates
 int ieee80211_get_ratemask(struct ieee80211_supported_band *sband,
 			   const u8 *rates, unsigned int n_rates,
 			   u32 *mask);
