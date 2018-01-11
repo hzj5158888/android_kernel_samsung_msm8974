@@ -9,7 +9,7 @@ static char new_command_line[COMMAND_LINE_SIZE];
 
 static int cmdline_proc_show(struct seq_file *m, void *v)
 {
-	char *temp_saved_command_line, *temp;
+	char *temp_new_command_line, *temp;
 	int i;
 	
 	temp_new_command_line = kmalloc(strlen(new_command_line)+1, GFP_KERNEL);
@@ -20,7 +20,7 @@ static int cmdline_proc_show(struct seq_file *m, void *v)
 		for(i=0;i<20;i++)	*(temp+i)='*';
 	}
 
-	seq_printf(m, "%s\n", temp_saved_command_line);
+	seq_printf(m, "%s\n", temp_new_command_line);
 
 	kfree(temp_new_command_line);
 	return 0;
