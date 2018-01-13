@@ -1998,10 +1998,10 @@ void mdss_mdp_set_roi(struct mdss_mdp_ctl *ctl,
 {
 	struct mdss_mdp_img_rect temp_roi, mixer_roi;
 
-	temp_roi.x = data->roi.x;
-	temp_roi.y = data->roi.y;
-	temp_roi.w = data->roi.w;
-	temp_roi.h = data->roi.h;
+	temp_roi.x = data->l_roi.x;
+	temp_roi.y = data->l_roi.y;
+	temp_roi.w = data->l_roi.w;
+	temp_roi.h = data->l_roi.h;
 
 	/*
 	 * No Partial Update for:
