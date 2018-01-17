@@ -1740,7 +1740,7 @@ static void kgsl_cmdbatch_sync_expire(struct kgsl_device *device,
 	 * this time in interrupt context and uses same lock.
 	 * So use irq-save version of spin lock.
 	 */
-	spin_lock_bh(&event->cmdbatch->lock, flags);
+	spin_lock_irqsave(&event->cmdbatch->lock, flags);
 
 	/*
 	 * sync events that are contained by a cmdbatch which has been
@@ -1757,7 +1757,7 @@ static void kgsl_cmdbatch_sync_expire(struct kgsl_device *device,
 
 	event->handle = NULL;
 	sched = list_empty(&event->cmdbatch->synclist) ? 1 : 0;
-	spin_unlock_bh(&event->cmdbatch->lock, flags);
+	spin_unlock_irqrestore(&event->cmdbatch->lock, flags);
 
 	/* If the list is empty delete the canary timer */
 	if (sched)
@@ -1934,13 +1934,6 @@ static int kgsl_cmdbatch_add_sync_fence(struct kgsl_device *device,
 	 */
 
 	kref_get(&event->refcount);
-<<<<<<< HEAD
-=======
-
-	spin_lock(&cmdbatch->lock);
-	list_add(&event->node, &cmdbatch->synclist);
-	spin_unlock(&cmdbatch->lock);
->>>>>>> 34d9920... msm: kgsl: Fix potential spin lock recursion in dispatcher
 
 	/*
 	 * Increment the reference count for the async callback.
@@ -1962,19 +1955,12 @@ static int kgsl_cmdbatch_add_sync_fence(struct kgsl_device *device,
 		event->handle = NULL;
 		/* Remove event from the synclist */
 		list_del(&event->node);
-<<<<<<< HEAD
 		spin_unlock_irqrestore(&cmdbatch->lock, flags);
 		/* Put for event removal from the synclist */
 		kgsl_cmdbatch_sync_event_put(event);
 		/* Unable to add event to the async callback so a put */
 		kgsl_cmdbatch_sync_event_put(event);
 		/* Put since event no longer needed by this function */
-=======
-		spin_unlock(&cmdbatch->lock);
-		kgsl_cmdbatch_sync_event_put(event);
-
-		/* Event no longer needed by this function */
->>>>>>> 34d9920... msm: kgsl: Fix potential spin lock recursion in dispatcher
 		kgsl_cmdbatch_sync_event_put(event);
 
 		/*
