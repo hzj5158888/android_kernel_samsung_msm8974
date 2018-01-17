@@ -182,22 +182,12 @@ int ipa_generate_flt_hw_tbl(enum ipa_ip_type ip, struct ipa_mem_buffer *mem)
 	int res;
 	struct ipa_mem_buffer flt_tbl_mem;
 	u8 *ftbl_membody;
-	int res;
 
 	res = ipa_get_flt_hw_tbl_size(ip, &hdr_sz);
 	if (res < 0) {
 		IPAERR("ipa_get_flt_hw_tbl_size failed %d\n", res);
 		return res;
 	}
-
-<<<<<<< HEAD
-	res = ipa_get_flt_hw_tbl_size(ip, &hdr_sz);
-	if (res < 0) {
-		IPAERR("ipa_get_flt_hw_tbl_size failed %d\n", res);
-		return res;
-	}
-=======
->>>>>>> 1b3faa4... msm: ipa: fix ioctl input param validation
 	mem->size = res;
 	mem->size = IPA_HW_TABLE_ALIGNMENT(mem->size);
 
