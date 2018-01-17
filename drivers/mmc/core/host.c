@@ -529,38 +529,6 @@ out:
 	return retval;
 }
 
-<<<<<<< HEAD
-=======
-static ssize_t show_scale_down_in_low_wr_load(struct device *dev,
-		struct device_attribute *attr, char *buf)
-{
-	struct mmc_host *host = cls_dev_to_mmc_host(dev);
-
-	if (!host)
-		return -EINVAL;
-
-	return snprintf(buf, PAGE_SIZE, "%d\n",
-		host->clk_scaling.scale_down_in_low_wr_load);
-}
-
-static ssize_t store_scale_down_in_low_wr_load(struct device *dev,
-		struct device_attribute *attr, const char *buf, size_t count)
-{
-	struct mmc_host *host = cls_dev_to_mmc_host(dev);
-	unsigned long value;
-
-	if (!host)
-		return -EINVAL;
-
-	if (!host->card || kstrtoul(buf, 0, &value))
-		return -EINVAL;
-
-	host->clk_scaling.scale_down_in_low_wr_load = value;
-
-	return count;
-}
-
->>>>>>> 1eb8b15... mmc: clk_scaling: Fix scale_down_in_low_wr_load sysfs return value
 static ssize_t show_up_threshold(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
