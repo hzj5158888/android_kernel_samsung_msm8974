@@ -3193,7 +3193,11 @@ CONFIG_MSM_DEVFREQ_DEVBW=y
 #
 # File systems
 #
+<<<<<<< HEAD:arch/arm/configs/lineageos_find7_defconfig
 CONFIG_DCACHE_WORD_ACCESS=y
+=======
+CONFIG_LOW_ORDER_SEQ_MALLOC=y
+>>>>>>> 716fbf2... ARM: configs: lineage_*: Use ext4 for ext2/3:arch/arm/configs/lineage_hltekor_defconfig
 # CONFIG_EXT2_FS is not set
 # CONFIG_EXT3_FS is not set
 CONFIG_EXT4_FS=y
